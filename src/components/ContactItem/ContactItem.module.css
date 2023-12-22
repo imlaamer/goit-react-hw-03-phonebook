@@ -1,0 +1,26 @@
+.contactsItem:not(:last-child) {
+  margin-bottom: 15px;
+}
+
+.contactsItem {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-direction: row;
+}
+
+.contactDeleteBtn {
+  padding: 5px 10px;
+  background-color: rgb(9, 1, 47);
+  color: aliceblue;
+  font-size: 12px;
+  border-radius: 24px;
+  cursor: pointer;
+  transition: background-color 300ms ease-in-out, box-shadow 200ms ease-in-out,
+    transform 200ms ease-in-out;
+}
+
+.contactDeleteBtn:hover {
+  background-color: rgb(2, 4, 105);
+  box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.2);
+}

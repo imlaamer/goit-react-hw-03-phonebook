@@ -1,0 +1,26 @@
+.filterBox {
+  width: 100%;
+
+  padding-top: 12px;
+}
+
+.filterText {
+  font-size: 26px;
+  text-align: center;
+  color: rgb(2, 4, 105);
+  font-weight: 500;
+}
+
+.filterInput {
+  width: calc(100% - 20px);
+  outline: none;
+  border: 1px solid rgba(0, 0, 0, 0.261);
+  border-radius: 22px;
+  padding: 10px;
+  margin: 20px 0;
+  font-size: 18px;
+}
+
+.filterInput:focus {
+  border-color: rgb(2, 4, 105);
+}
