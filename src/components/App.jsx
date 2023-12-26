@@ -2,6 +2,10 @@ import { Component } from 'react';
 import ContactForm from 'components/ContactForm';
 import ContactList from 'components/ContactList';
 import Filter from 'components/Filter';
+import {
+  getContacts,
+  CONTACTS_KEY,
+} from 'localStorage/contactsLocalStorage.js';
 
 class App extends Component {
   state = {
@@ -14,6 +18,16 @@ class App extends Component {
     filter: '',
   };
 
+  componentDidMount() {
+    this.setState({ contacts: getContacts() }); //
+  }
+
+  componentDidUpdate(_, prevState) {
+    if (this.state.contacts !== prevState.contacts) {
+      localStorage.setItem(CONTACTS_KEY, JSON.stringify(this.state.contacts));
+    }
+  }
+
   handleFilterChange = event => {
     const { name, value } = event.currentTarget;
     this.setState({ [name]: value });
@@ -25,14 +39,13 @@ class App extends Component {
         contact.name.toLowerCase() === newContact.name.trim().toLowerCase()
     );
 
-    // Не зрозуміла про іф ретьорн, яка різниця з іф елс ?
     if (isDuplicate) {
       alert(`${newContact.name} is already in contacts`);
-    } else {
-      this.setState(prevState => {
-        return { contacts: [...prevState.contacts, newContact] };
-      });
+      return;
     }
+    this.setState(prevState => {
+      return { contacts: [...prevState.contacts, newContact] };
+    });
   };
 
   getFilteredContacts = () => {
@@ -108,7 +121,7 @@ class App extends Component {
             />
             {filteredContacts.length !== 0 ? (
               <ContactList
-                filteredContacts={filteredContacts}
+                filteredContacts={filteredContacts} //
                 onClick={this.handleDeleteContact}
               />
             ) : (
