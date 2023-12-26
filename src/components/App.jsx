@@ -19,7 +19,9 @@ class App extends Component {
   };
 
   componentDidMount() {
-    this.setState({ contacts: getContacts() }); //
+    if (getContacts().length !== 0) {
+      this.setState({ contacts: getContacts() });
+    }
   }
 
   componentDidUpdate(_, prevState) {
