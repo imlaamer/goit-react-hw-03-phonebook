@@ -2,10 +2,7 @@ import { Component } from 'react';
 import ContactForm from 'components/ContactForm';
 import ContactList from 'components/ContactList';
 import Filter from 'components/Filter';
-import {
-  getContacts,
-  CONTACTS_KEY,
-} from 'localStorage/contactsLocalStorage.js';
+import { setContacts, getContacts } from 'localStorage/contactsLocalStorage.js';
 
 class App extends Component {
   state = {
@@ -19,14 +16,15 @@ class App extends Component {
   };
 
   componentDidMount() {
-    if (getContacts().length !== 0) {
-      this.setState({ contacts: getContacts() });
+    const savedPersistContacts = getContacts(); // +
+    if (savedPersistContacts.length !== 0) {
+      this.setState({ contacts: savedPersistContacts });
     }
   }
 
   componentDidUpdate(_, prevState) {
     if (this.state.contacts !== prevState.contacts) {
-      localStorage.setItem(CONTACTS_KEY, JSON.stringify(this.state.contacts));
+      setContacts(this.state.contacts); //+
     }
   }
 
